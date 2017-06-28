@@ -6,7 +6,8 @@ export const reqVideos = name => {
 
   const promise = new Promise((resolve, reject) => {
     request
-      .get(`${config.ROOT_URL}/${name}/videos&client_id=${config.API_KEY}`)
+      .get(`${config.URL_ROOT}/${name}/videos`)
+      .set({ Accept: 'application/vnd.twitchtv.v5+json', 'Client-ID': `${config.CLIENT_ID}` })
       .end((err, res) => {
         if (err) {
           reject(err);

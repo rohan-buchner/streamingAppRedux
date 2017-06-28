@@ -6,7 +6,8 @@ export const reqFeatureStreams = featured => {
 
   const promise = new Promise((resolve, reject) => {
     request
-      .get(`${config.ROOT_URL}/streams/featured?limit=48&offset=0&client_id=${config.API_KEY}`)
+      .get(`${config.ROOT_URL}/streams/featured?limit=48&offset=0`)
+      .set({ Accept: 'application/vnd.twitchtv.v5+json', 'Client-ID': `${config.CLIENT_ID}` })
       .end((err, res) => {
         if (err) {
           reject(err);

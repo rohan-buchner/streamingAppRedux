@@ -1,12 +1,13 @@
 import request from "superagent";
 import * as types from "../constants/";
-import API_KEY from '../../../server/config/api_key';
+import config from '../../../server/config/serverConfig';
 
 export const reqAllGames = games => {
 
   const promise = new Promise((resolve, reject) => {
     request
-      .get(`${config.ROOT_URL}/${config.API_KEY}`)
+      .get(`${config.URL_ROOT}/games/top`)
+      .set({ Accept: 'application/vnd.twitchtv.v5+json', 'Client-ID': `${config.CLIENT_ID}` })
       .end((err, res) => {
         if (err) {
           reject(err);

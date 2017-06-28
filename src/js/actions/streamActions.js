@@ -6,7 +6,8 @@ export const reqStreams = (game) => {
 
   const promise = new Promise((resolve, reject) => {
     request
-      .get(`${config.ROOT_URL}/${game}&client_id=${config.API_KEY}`)
+      .get(`${config.URL_ROOT}/streams?limit=60&offset=0&game=${game}&broadcaster_language=en`)
+      .set({ Accept: 'application/vnd.twitchtv.v5+json', 'Client-ID': `${config.CLIENT_ID}` })
       .end((err, res) => {
         if (err) {
           reject(err);
@@ -27,7 +28,8 @@ export const reqOneStream = (name) => {
 
   const promise = new Promise((resolve, reject) => {
     request
-      .get(`https://api.twitch.tv/kraken/channels/${name}`)
+      .get(`${config.URL_ROOT}/streams?channel=${name}&limit=30`)
+      .set({ Accept: 'application/vnd.twitchtv.v5+json', 'Client-ID': `${config.CLIENT_ID}` })
       .end((err, res) => {
         if (err) {
           reject(err);
